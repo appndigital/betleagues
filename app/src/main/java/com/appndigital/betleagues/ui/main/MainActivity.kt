@@ -17,7 +17,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import com.appndigital.betleagues.R
 import com.appndigital.betleagues.ui.theme.BetLeaguesTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
-                                Text(text = getString(R.string.app_name))
+                                Text(text = stringResource(id = R.string.app_name))
                             },
                             colors = TopAppBarDefaults.smallTopAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.primary,
@@ -50,14 +50,10 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .padding(it)
                                 .fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
+                            verticalArrangement = Arrangement.Top,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(
-                                text = "Content of the page",
-                                fontSize = 30.sp,
-                                color = Color.Black
-                            )
+                            MainScreenUI(viewModel = viewModel)
                         }
                     })
             }

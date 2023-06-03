@@ -20,8 +20,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun QuerySearch(
     modifier: Modifier = Modifier,
@@ -32,6 +35,8 @@ fun QuerySearch(
     onQueryChanged: (String) -> Unit
 ) {
     var showClearButton by remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     OutlinedTextField(
         modifier = modifier
@@ -53,6 +58,8 @@ fun QuerySearch(
 
         },
         keyboardActions = KeyboardActions(onDone = {
+            focusManager.clearFocus()
+            keyboardController?.hide()
             onDoneActionClick()
         }),
         keyboardOptions = KeyboardOptions(
