@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.appndigital.betleagues.R
 import com.appndigital.betleagues.ui.component.AutoCompleteTextView
 import com.appndigital.betleagues.ui.component.TeamGrid
 
@@ -24,7 +25,7 @@ fun MainScreenUI(viewModel: MainViewModel) {
         AutoCompleteTextView(
             modifier = Modifier.fillMaxWidth(),
             query = query,
-            queryLabel = "Rechercher une ligue",
+            queryLabel = stringResource(R.string.league_lookup),
             onQueryChanged = { updatedQuery ->
                 viewModel.getPredictions(updatedQuery)
             },
